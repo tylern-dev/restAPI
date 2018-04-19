@@ -30,7 +30,7 @@ exports.users_signup = (req, res, next) => {
                 email: result.email
               }, process.env.JWT_SECRET);
 
-              res.status(201).json({ message: 'User created', token: token });
+              res.status(201).json({ message: 'User created', ssid: token });
             })
             .catch(err => {
               console.log(err)
@@ -41,21 +41,30 @@ exports.users_signup = (req, res, next) => {
     })
 }
 
-exports.user_login = (req, res, next) =>{
-  User.findOne({ email: req.body.email})
+exports.user_login = (req, res, next) => {
+  // var authHeader = req.headers.authorization.split(" ")[1]
+  // // jwt.verify(authHeader, process.env.JWT_SECRET)
+
+  User.findOne({ email: req.body.email })
     .exec()
-    .then( user => {
-      if (!user){
-        return res.status(401).json({message: "invalid email or password"})
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({ message: "invalid email or password" })
       }
       bcrypt.compare(req.body.password, user.password, (err, result) => {
         if (err) {
-          return res.status(401).json({message: "invalid email or password"});
+          return res.status(401).json({ message: "invalid email or password" });
         }
         if (result) {
-          return res.status(200).json({ message: 'Auth Successful'});
+          jwt.sign({ _id: user._id, email: user.email, role:user.role }, process.env.JWT_SECRET, function (err, token) {
+            return res.status(200).json({
+              message: 'Auth Successful',
+              ssid: token
+            });
+          });
+        } else {
+          res.status(401).json({ message: 'Auth failed' })
         }
-        res.status(401).json({ message: 'Auth failed'})
       })
 
 
