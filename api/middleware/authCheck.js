@@ -1,3 +1,4 @@
+/* This file is for doing the auth check middleware on the routes. */
 const jwt = require('jsonwebtoken');
 
 module.exports = (req,res,next) => {
