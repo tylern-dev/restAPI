@@ -1,13 +1,15 @@
+require('dotenv').config();
+const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
-const path = require("path");
+const logger = require('morgan');
 const app = express();
 const PORT = process.env.PORT || 5500;
-require('dotenv').config();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(logger('dev'))
 
 // db connection
 require('./config/dbConnection')(mongoose);
