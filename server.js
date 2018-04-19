@@ -19,7 +19,7 @@ require('./config/dbConnection')(mongoose);
 const userRoutes = require('./api/routes/userRoutes');
 
 //routes
-app.use('/', userRoutes);
+app.use('/apiUser', userRoutes);
 
 
 app.get('/api/hello', (req, res) => {
