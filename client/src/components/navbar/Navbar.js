@@ -7,9 +7,10 @@ class Navbar extends React.Component {
     return (
       <nav className="navigation">
         <ul>
-          <h3>Logo</h3>
+          <NavLink to="/"><h3>Logo</h3></NavLink>
 
           <NavLink to="/signup">Signup</NavLink>
+          <NavLink to="/login">Login</NavLink>
 
         </ul>
       </nav>

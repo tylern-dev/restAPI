@@ -12,7 +12,7 @@ exports.users_signup = (req, res, next) => {
       // user.find returns empty array if nothing is found
       if (user.length >= 1) {
         console.log('with email', user)
-        return res.status(409).json({ message: 'mail exists' })
+        return res.status(409).json({ message: 'Email already exists' })
       } else {
         bcrypt.hash(req.body.password, 10).then(hash => {
           const user = new User({

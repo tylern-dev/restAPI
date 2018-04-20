@@ -1,13 +1,17 @@
 import axios from 'axios';
 
 export const createUser = (user, cb) => {
-  console.log(user)
+  console.log(user);
   axios.post('/apiUser/signup', user)
-    .then(response => {
+    .then((response) => {
       // call the response back to the signup function
-      cb(response)
-      console.log('user added')
-
+      cb(response);
+      console.log('user added');
     })
-    .catch(err => {console.log('error adding user')})
-}
+    .catch((err) => {
+      cb(err.response);
+      // console.log('error adding user', err.response);
+    });
+};
+
+export const signInUser = () => {};
