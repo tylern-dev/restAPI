@@ -9,9 +9,7 @@ class Router extends React.Component {
   render() {
     return (
       <BrowserRouter>
-
         <Switch>
-
           <Route exact path="/" component={Home} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
