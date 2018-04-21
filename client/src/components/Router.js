@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 import Home from './containers/Home';
 import Signup from './containers/Signup';
 import Login from './containers/Login';
 import NotFound from './containers/NotFound';
+
 
 class Router extends React.Component {
   render() {
