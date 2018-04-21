@@ -49,21 +49,21 @@ exports.user_login = (req, res, next) => {
     .exec()
     .then(user => {
       if (!user) {
-        return res.status(401).json({ message: "invalid email or password" })
+        return res.status(401).json({ message: "Invalid Username or Password" })
       }
       bcrypt.compare(req.body.password, user.password, (err, result) => {
         if (err) {
-          return res.status(401).json({ message: "invalid email or password" });
+          return res.status(401).json({ message: "Invalid Username or Password" });
         }
         if (result) {
-          jwt.sign({ _id: user._id, email: user.email, role:user.role }, process.env.JWT_SECRET, function (err, token) {
+          jwt.sign({ _id: user._id, email: user.email, role:user.role }, process.env.JWT_SECRET,  (err, token) => {
             return res.status(200).json({
               message: 'Auth Successful',
               ssid: token
             });
           });
         } else {
-          res.status(401).json({ message: 'Auth failed' })
+          res.status(401).json({ message: 'Invalid Username or Password' })
         }
       })
 
