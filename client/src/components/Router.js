@@ -1,8 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from '../pages/Home';
-import Signup from '../pages/Signup';
-import Login from '../pages/Login';
+
+import Home from './containers/Home';
+import Signup from './containers/Signup';
+import Login from './containers/Login';
+import NotFound from './containers/NotFound';
 
 
 class Router extends React.Component {
@@ -13,6 +15,7 @@ class Router extends React.Component {
           <Route exact path="/" component={Home} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
+          <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
 
