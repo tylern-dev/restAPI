@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Navbar from '../navbar/Navbar';
+import Navbar from '../components/navbar/Navbar';
 
 class Home extends React.Component {
   state = {

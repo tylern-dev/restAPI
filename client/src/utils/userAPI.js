@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const createUser = (user, cb) => {
+export const createUserAPI = (user, cb) => {
   console.log(user);
   axios.post('/apiUser/signup', user)
     .then((response) => {
@@ -13,5 +13,6 @@ export const createUser = (user, cb) => {
       // console.log('error adding user', err.response);
     });
 };
+
 
 export const signInUser = () => {};

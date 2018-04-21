@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
-import Navbar from '../navbar/Navbar';
-import Error from '../Error';
-import { createUser } from '../../utils/userAPI';
-import { saveToken } from '../../utils/authService';
-import { passwordCheck } from '../../helper/helperFunctions';
+import Navbar from '../components/navbar/Navbar';
+import Error from '../components/Error';
+import { createUserAPI } from '../utils/userAPI';
+import { saveToken } from '../utils/authService';
+import { passwordCheck } from '../helper/helperFunctions';
 
 class Signup extends React.Component {
   state ={
@@ -19,7 +19,7 @@ class Signup extends React.Component {
     // check the password - if good create the user
     passwordCheck(password, checkPassword, (check) => {
       if (check) {
-        createUser({ email, password }, (response) => {
+        createUserAPI({ email, password }, (response) => {
           if (response.status !== 201) {
             // console.log('err creating user-----', response);
             this.setState({ error: response.data.message });
@@ -41,11 +41,11 @@ class Signup extends React.Component {
   }
 
 
-  changeField = (e) => {
+  changeField = (event) => {
     this.setState({
       user: {
         ...this.state.user,
-        [e.currentTarget.name]: e.currentTarget.value,
+        [event.currentTarget.name]: event.currentTarget.value,
       },
     });
   }
