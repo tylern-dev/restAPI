@@ -1,55 +1,32 @@
 import React, { Fragment } from 'react';
 import Error from '../components/Error';
 import Navbar from '../components/navbar/Navbar';
-import { signInUser } from '../utils/userAPI';
-import { saveToken } from '../utils/authService';
+import PropTypes from 'prop-types';
 
-class Login extends React.Component {
-  state = {
-    user: {},
-    error: '',
-  }
+import withAuth from '../helper/AuthHOC';
 
-  changeValue = (event) => {
-    this.setState({
-      user: {
-        ...this.state.user,
-        [event.currentTarget.name]: event.currentTarget.value,
-      },
-    });
-  }
+const Login = ({ submitUser, changeValue, error }) => (
+  <Fragment>
+    <Navbar />
+    <h1>Login Page</h1>
+    <form onSubmit={submitUser}>
+      <label htmlFor="email">Email:
+        <input id="email" type="text" name="email" onChange={changeValue} />
+      </label>
+      <label htmlFor="password">Password:
+        <input id="password" type="password" name="password" onChange={changeValue} />
+      </label>
+      <button type="submit">Log In</button>
+    </form>
+    <Error error={error} />
+  </Fragment>
+);
 
-  submitUser = (event) => {
-    event.preventDefault();
-    signInUser(this.state.user, (res) => {
-      if (res.status !== 200) {
-        this.setState({ error: res.data.message });
-        console.log(this.state.error);
-      } else {
-        console.log(res);
-        saveToken(res.data.ssid);
-      }
-    });
-  }
+Login.propTypes = {
+  submitUser: PropTypes.func.isRequired,
+  changeValue: PropTypes.func.isRequired,
+  error: PropTypes.string,
+};
 
-  render() {
-    return (
-      <Fragment>
-        <Navbar />
-        <h1>Login Page</h1>
-        <form onSubmit={this.submitUser}>
-          <label htmlFor="email">Email:
-            <input id="email" type="text" name="email" onChange={this.changeValue} value={this.state.email} />
-          </label>
-          <label htmlFor="password">Password:
-            <input id="password" type="password" name="password" onChange={this.changeValue} value={this.state.password} />
-          </label>
-          <button type="submit">Log In</button>
-        </form>
-        <Error error={this.state.error} />
-      </Fragment>
-    );
-  }
-}
 
-export default Login;
+export default withAuth(Login);
