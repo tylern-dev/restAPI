@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Navbar from '../components/navbar/Navbar';
 import Error from '../components/Error';
 import withAuth from '../helper/AuthHOC';
-import PropTypes from 'prop-types';
 
 const Signup = ({ signUpUser, changeValue, error }) => (
   <Fragment>

@@ -1,24 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { signInUser, createUserAPI } from '../utils/userAPI';
 import { saveToken } from '../utils/authService';
 import { passwordCheck } from './helperFunctions';
 
+/* THIS HOC CONTROLLS THE SIGNIN & SIGNUP COMPONENTs  */
+
 export default function withAuth(AuthComponent) {
-  // auth class here <-- -->
   return class AuthWrapped extends React.Component {
+    static propTypes = {
+      updateIsLoggedIn: PropTypes.func.isRequired,
+      history: PropTypes.object.isRequired,
+    }
+
     state = {
       credentials: {},
       error: '',
     }
 
-    componentDidMount() {
-      // testing
-      console.log('this mounted from HOC');
-    }
-
     // grabs value from input
     changeValue = (event) => {
-      console.log('from hoc', event);
       this.setState({
         credentials: {
           ...this.state.credentials,
@@ -37,6 +38,7 @@ export default function withAuth(AuthComponent) {
         } else {
           console.log(res);
           saveToken(res.data.ssid);
+          this.props.updateIsLoggedIn();
         }
       });
     }
@@ -57,6 +59,8 @@ export default function withAuth(AuthComponent) {
               console.log(this.state.error);
             } else {
               saveToken(response.data.ssid);
+              this.props.updateIsLoggedIn();
+              this.props.history.push('/'); // maybe try a redirect instead
             }
           });
         } else {

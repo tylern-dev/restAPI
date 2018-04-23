@@ -17,9 +17,11 @@ require('./config/dbConnection')(mongoose);
 
 //route imports
 const userRoutes = require('./api/routes/userRoutes');
+const tokenRoutes = require('./api/routes/tokenRoutes');
 
 //routes
 app.use('/apiUser', userRoutes);
+app.use('/apiToken', tokenRoutes)
 
 
 app.get('/api/hello', (req, res) => {
