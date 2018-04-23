@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Error from '../components/Error';
 import Navbar from '../components/navbar/Navbar';
-import PropTypes from 'prop-types';
 
 import withAuth from '../helper/AuthHOC';
 

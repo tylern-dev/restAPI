@@ -6,5 +6,10 @@ export const passwordCheck = (password, pwCheck, cb) => {
   }
 };
 
-export const anotherFunction = () => {};
-
+export const pwCheckPromiseTest = (password, pwCheck) => new Promise((resolve, reject) => {
+  if (password === pwCheck) {
+    resolve(true);
+  } else {
+    reject(Error('passwords don\'t match'));
+  }
+});
