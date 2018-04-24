@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Error from '../components/Error';
-import Navbar from '../components/navbar/Navbar';
+
 
 import withAuth from '../helper/AuthHOC';
 
 const Login = ({ submitUser, changeValue, error }) => (
   <Fragment>
-    <Navbar />
+
     <h1>Login Page</h1>
     <form onSubmit={submitUser}>
       <label htmlFor="email">Email:

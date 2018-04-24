@@ -13,3 +13,4 @@ export const pwCheckPromiseTest = (password, pwCheck) => new Promise((resolve, r
     reject(Error('passwords don\'t match'));
   }
 });
+

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Navbar from '../components/navbar/Navbar';
+
 
 class Home extends React.Component {
   state = {
@@ -25,7 +25,7 @@ class Home extends React.Component {
   render() {
     return (
       <Fragment>
-        <Navbar />
+
         <h1 className="home">{this.state.response}</h1>
       </Fragment>
     );
